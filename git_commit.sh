@@ -117,6 +117,7 @@ push_changes() {
     # Ask for confirmation to push the changes
     if gum confirm "🚀 Ready to blast off and push the commit to the remote? 🌌"; then
         echo "Damn, enjoy your code going live! 🎉🚀"
+        echo " "
         git push
     else
         echo "Alright, no space travel today. 🌠 Maybe next time! 🚀👨‍🚀"
