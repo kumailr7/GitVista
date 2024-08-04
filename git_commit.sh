@@ -60,7 +60,7 @@ add_files() {
 # Function to commit changes
 commit_changes() {
     # Display a bold and centered header using gum
-     display_header "📝 Git Status 📝" 219
+     display_header "📝 Git Commit 📝" 219
 
     echo " "
 
@@ -157,21 +157,15 @@ main() {
         echo " "
         get_git_help
     fi
-    
     echo " "
-    # Display Git Status
-    display_header "📝 Git Status 📝" 216
-    git_status
 
     # Add Files Section
     display_header "📁 Git Add 📁" 218
-    selected_action="$ACTION" # Example selected option
-    display_header "📁 Git Add: $selected_action 📁" 218
     add_files
     echo " "
 
-    # Display Git Status Again
-    display_header "📝 Git Status 📝" 216
+    # Display Git Status    
+    display_header " 🔄 Git Status 🔄 " 216
     git_status
 
     # Commit Changes
