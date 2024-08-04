@@ -58,67 +58,14 @@ add_files() {
     fi
 }
 
-# # Function to commit changes
-# commit_changes() {
-#     # Display a bold and centered header using gum
-#      display_header "📝 Git Commit 📝" 219
-
-#     echo " "
-
-#     # Define the commit types
-#     local COMMIT_TYPES=(
-#         "🐛 fix: Bug fix"
-#         "✨ feat: New feature"
-#         "📝 docs: Documentation changes"
-#         "💄 style: Code style changes"
-#         "♻️ refactor: Code refactoring"
-#         "⚡ perf: Performance improvement"
-#         "✅ test: Add or update tests"
-#         "🔧 build: Build system changes"
-#         "⚙️ ci: CI configuration changes"
-#     )
-
-#     echo -e "Select the type of change you're committing: $(gum style --italic --foreground 98 '(use arrow keys)')"
-
-#     # Prompt the user to choose a commit type
-#     local SELECTED_TYPE=$(printf "%s\n" "${COMMIT_TYPES[@]}" | gum choose)
-
-#     echo " "
-
-#     # Extract type from the selected commit type
-#     local TYPE=$(echo "$SELECTED_TYPE" | cut -d ' ' -f 2- | cut -d ':' -f 1)
-
-#     # Ask for the scope of the change (class or file name)
-#     echo -e "Specify the file or class name that you've changed: $(gum style --italic --foreground 99 '(e.g., app.py)')?\n"
-#     local SCOPE=$(gum input --placeholder "Enter the scope of the change")
-
-#     # Since the scope is optional, wrap it in parentheses if it has a value
-#     test -n "$SCOPE" && SCOPE="($SCOPE)"
-
-#     echo -e "Write a short and imperative summary of the code changes: $(gum style --italic --foreground 99 '(lower case and no period)')?\n"
-#     # Pre-populate the input with the type(scope): so that the user may change it
-#     local SUMMARY=$(gum input --placeholder "Summary of this change")
-
-#     echo -e "Provide additional contextual information about the code changes: $(gum style --italic --foreground 99 '(lower case and no period)')?\n"
-#     local DESCRIPTION=$(gum write --placeholder "Details of this change")
-
-#     echo -e $(gum style --italic --bold --foreground 99 'Tailsman will scans your files for git-leaks before commit')
-
-#     echo " "
-
-#     # Commit these changes if user confirms
-#     if gum confirm "Commit changes?"; then
-#         git commit -m "$TYPE:$SCOPE: $SUMMARY" -m "$DESCRIPTION"
-#     fi
-# }
-
 # Function to commit changes
 commit_changes() {
     # Display a bold and centered header using gum
-    echo -e "$(gum style --border rounded --padding "1 2" --width 80 --margin "1" --foreground 219 "📝 Git Commit 📝")"
+     display_header "📝 Git Commit 📝" 219
 
     echo " "
 
+    # Define the commit types with colors
     local COMMIT_TYPES=(
         "$(gum style --foreground 202 --bold '🐛 fix: Bug fix')"
         "$(gum style --foreground 114 --bold '✨ feat: New feature')"
@@ -131,7 +78,10 @@ commit_changes() {
         "$(gum style --foreground 63 --bold '⚙️ ci: CI configuration changes')"
     )
 
-    echo -e "$(gum style --border rounded --padding "1 2" --width 80 --margin "1" --foreground 219 --bold "Select the type of change you're committing: (use arrow keys)")"
+
+    echo -e "Select the type of change you're committing: $(gum style --italic --foreground 98 '(use arrow keys)')"
+
+    # Prompt the user to choose a commit type
     local SELECTED_TYPE=$(printf "%s\n" "${COMMIT_TYPES[@]}" | gum choose)
 
     echo " "
@@ -140,19 +90,20 @@ commit_changes() {
     local TYPE=$(echo "$SELECTED_TYPE" | cut -d ' ' -f 2- | cut -d ':' -f 1)
 
     # Ask for the scope of the change (class or file name)
-    echo -e "$(gum style --border rounded --padding "1 2" --width 80 --margin "1" --foreground 219 --italic "Specify the file or class name that you've changed: (e.g., app.py)?")"
+    echo -e "Specify the file or class name that you've changed: $(gum style --italic --foreground 99 '(e.g., app.py)')?\n"
     local SCOPE=$(gum input --placeholder "Enter the scope of the change")
 
     # Since the scope is optional, wrap it in parentheses if it has a value
     test -n "$SCOPE" && SCOPE="($SCOPE)"
 
-    echo -e "$(gum style --border rounded --padding "1 2" --width 80 --margin "1" --foreground 219 --italic "Write a short and imperative summary of the code changes: (lower case and no period)?")"
+    echo -e "Write a short and imperative summary of the code changes: $(gum style --italic --foreground 99 '(lower case and no period)')?\n"
+    # Pre-populate the input with the type(scope): so that the user may change it
     local SUMMARY=$(gum input --placeholder "Summary of this change")
 
-    echo -e "$(gum style --border rounded --padding "1 2" --width 80 --margin "1" --foreground 219 --italic "Provide additional contextual information about the code changes: (lower case and no period)?")"
+    echo -e "Provide additional contextual information about the code changes: $(gum style --italic --foreground 99 '(lower case and no period)')?\n"
     local DESCRIPTION=$(gum write --placeholder "Details of this change")
 
-    echo -e "$(gum style --border rounded --padding "1 2" --width 80 --margin "1" --foreground 219 --italic --bold 'Tailsman will scan your files for git-leaks before commit')"
+    echo -e $(gum style --italic --bold --foreground 99 'Tailsman will scans your files for git-leaks before commit')
 
     echo " "
 
