@@ -20,10 +20,13 @@ git_vista() {
 
   # Header and prompt configuration with colors and styles
   local header=$(gum style --foreground "$header_color" --bold --underline "🚀 GIT VISTA 🚀")
-  local subtitle=$(gum style --foreground "$subtitle_color" --italic "✨ Your Git Tool ✨")
+  local subtitle=$(gum style --foreground "$subtitle_color" --italic "✨ Your Interactive Git Tool ✨")
   local prompt=$(gum style --foreground "$prompt_color" $prompt_italic "🔧 Choose an option:")
   
-  echo " "
+  gum style \
+	--foreground 212 --border-foreground 218 --border "rounded" --width 40 --align "center" \
+	--margin "1 1" --padding "2 4" \
+  "${header}"  "${subtitle}" 
   # Define options with gum style
   local options=(
     "$(gum style --foreground 34 --bold '1. Git Command Help (AI-Guide) 📚')"
@@ -32,11 +35,11 @@ git_vista() {
     "$(gum style --foreground 23 --bold '4. Git Config ⚙️')"
   )
 
-  # Display the header
-  gum style \
-    --foreground 212 --border-foreground 212 \
-    "$header" \
-    "$subtitle"
+  # # Display the header
+  # gum style \
+  #   --foreground 212 --border-foreground 212 \
+  #   "$header" \
+  #   "$subtitle"
 
   echo "$prompt"
   # Display the menu and capture the selected option
@@ -79,15 +82,15 @@ git_vista() {
       push_changes
       ;;
     "3. Create New Branch 🌿")
-      echo "You selected Create New Branch 🌿"
+      echo "$(gum style --foreground 82 --bold '🌱 Awesome! You selected Create New Branch 🌿. Let’s branch out and create something new!')"
       # Add the corresponding action here
       ;;
     "4. Git Config ⚙️")
-      echo "You selected Git Config ⚙️"
+      echo "$(gum style --foreground 33 --bold '🔧 Great choice! You selected Git Config ⚙️. Let’s get your configuration sorted!')"
       # Add the corresponding action here
       ;;
     *)
-      echo "Invalid option selected."
+      echo "$(gum style --foreground 160 --bold '😕 Oops! That option seems to be invalid. Please try again.')"
       ;;
   esac
 }
