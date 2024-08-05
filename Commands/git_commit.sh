@@ -48,7 +48,7 @@ commit_changes() {
     echo -e $(gum style --italic --bold --foreground 99 'Tailsman will scans your files for git-leaks before commit')
 
     echo " "
-    
+
     # Commit these changes if user confirms
     if gum confirm "Commit changes?"; then
         git commit -m "$TYPE:$SCOPE: $SUMMARY" -m "$DESCRIPTION"

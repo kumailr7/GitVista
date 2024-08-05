@@ -9,6 +9,8 @@ source Commands/git_add.sh
 source Commands/git_status.sh
 source Commands/get_git_help.sh
 source Commands/git_commit.sh
+source Commands/git_branch.sh
+source Commands/list_branches.sh
 
 # Function to display the menu and perform actions
 git_vista() {
@@ -31,7 +33,7 @@ git_vista() {
   local options=(
     "$(gum style --foreground 34 --bold '1. Git Command Help (AI-Guide) 📚')"
     "$(gum style --foreground 39 --bold '2. Commit and Push Your Files 📝🚀')"
-    "$(gum style --foreground 56 --bold '3. Create New Branch 🌿')"
+    "$(gum style --foreground 56 --bold '3. Create New Branch 🌿 or Delete an Existing Branch 🗑️')"
     "$(gum style --foreground 23 --bold '4. Git Config ⚙️')"
   )
 
@@ -82,13 +84,16 @@ git_vista() {
       commit_changes
       push_changes
       ;;
-    "3. Create New Branch 🌿")
-      echo "$(gum style --foreground 82 --bold '🌱 Awesome! You selected Create New Branch 🌿. Let’s branch out and create something new!')"
-      # Add the corresponding action here
+    "3. Create New Branch 🌿 or Delete an Existing Branch 🗑️")
+      echo "$(gum style --foreground 82 --bold '🌱 You chose to Create a New Branch 🌿 or Delete an Existing Branch 🗑️. Let’s get it done!')"
+      manage_branch
+      echo " "
+      list_branches
+      echo " "
       ;;
     "4. Git Config ⚙️")
       echo "$(gum style --foreground 33 --bold '🔧 Great choice! You selected Git Config ⚙️. Let’s get your configuration sorted!')"
-      # Add the corresponding action here
+      echo " "
       ;;
     *)
       echo "$(gum style --foreground 160 --bold '😕 Oops! That option seems to be invalid. Please try again.')"
