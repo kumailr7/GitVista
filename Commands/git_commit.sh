@@ -32,7 +32,7 @@ commit_changes() {
     local TYPE=$(echo "$SELECTED_TYPE" | cut -d ' ' -f 2- | cut -d ':' -f 1)
 
     # Ask for the scope of the change (class or file name)
-    echo -e "Specify the file or class name that you've changed: $(gum style --italic --foreground 99 '(e.g., app.py)')?\n"
+    echo -e "Specify the files or class name that you've changed: $(gum style --italic --foreground 99 '(e.g.,app.py)')?\n"
     local SCOPE=$(gum input --placeholder "Enter the scope of the change")
 
     # Since the scope is optional, wrap it in parentheses if it has a value
@@ -48,7 +48,7 @@ commit_changes() {
     echo -e $(gum style --italic --bold --foreground 99 'Tailsman will scans your files for git-leaks before commit')
 
     echo " "
-
+    
     # Commit these changes if user confirms
     if gum confirm "Commit changes?"; then
         git commit -m "$TYPE:$SCOPE: $SUMMARY" -m "$DESCRIPTION"

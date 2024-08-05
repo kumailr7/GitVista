@@ -15,5 +15,5 @@ get_git_help() {
         -e 's/`\(.*\)`/\x1b[32m\1\x1b[0m/g')
 
     # Display the help text in a horizontal rectangle with gum style
-    echo -e "$help_text" | gum style --border rounded --padding "1 2" --width 80 --margin "1" --foreground 217
+    echo -e "$help_text" | gum style --border rounded --padding "1 2" --width 100 --margin "1" --foreground 217
 }
