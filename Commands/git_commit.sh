@@ -50,26 +50,14 @@ commit_changes() {
     echo " "
 
     # Function to display styled commit output
+    styled_commit_output() {
     local output="$1"
     echo "$(gum style --foreground 45 --bold "$output")"
+    }
     
-
-    # Function to commit changes if user confirms
-    local TYPE="$1"
-    local SCOPE="$2"
-    local SUMMARY="$3"
-    local DESCRIPTION="$4"
-
     # Commit these changes if user confirms
     if gum confirm "Commit changes?"; then
-        commit_output=$(git commit -m "$TYPE:$SCOPE: $SUMMARY" -m "$DESCRIPTION" 2>&1)
-        styled_commit_output "$commit_output"
+        git commit -m "$TYPE:$SCOPE: $SUMMARY" -m "$DESCRIPTION"
     fi
-    
-
-    # # Commit these changes if user confirms
-    # if gum confirm "Commit changes?"; then
-    #     git commit -m "$TYPE:$SCOPE: $SUMMARY" -m "$DESCRIPTION"
-    # fi
 }
 
