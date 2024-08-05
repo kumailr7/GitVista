@@ -58,7 +58,8 @@ git_vista() {
   # Perform the corresponding action based on the selected option
   case "$selected_option" in
     "1. Git Command Help (AI-Guide) 📚")
-      echo "You selected Git Command Help (AI-Guide) 📚"
+      echo "$(gum style --foreground 20 --bold 'You selected Git Command Help (AI-Guide) 📚')"
+      echo " "
       display_header "🚀 Git Help (AI-Guide) 🚀" 216
       if gum confirm "🤔 Do you need help with a Git command?"; then
         echo " "
