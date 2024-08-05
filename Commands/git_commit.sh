@@ -48,12 +48,6 @@ commit_changes() {
     echo -e $(gum style --italic --bold --foreground 99 'Tailsman will scans your files for git-leaks before commit')
 
     echo " "
-
-    # Function to display styled commit output
-    styled_commit_output() {
-    local output="$1"
-    echo "$(gum style --foreground 45 --bold "$output")"
-    }
     
     # Commit these changes if user confirms
     if gum confirm "Commit changes?"; then
