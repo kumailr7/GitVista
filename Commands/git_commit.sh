@@ -32,7 +32,7 @@ commit_changes() {
     local TYPE=$(echo "$SELECTED_TYPE" | cut -d ' ' -f 2- | cut -d ':' -f 1)
 
     # Ask for the scope of the change (class or file name)
-    echo -e "Specify the file or class name that you've changed: $(gum style --italic --foreground 99 '(e.g., app.py)')?\n"
+    echo -e "Specify the files or class name that you've changed: $(gum style --italic --foreground 99 '(e.g.,app.py)')?\n"
     local SCOPE=$(gum input --placeholder "Enter the scope of the change")
 
     # Since the scope is optional, wrap it in parentheses if it has a value
@@ -49,9 +49,27 @@ commit_changes() {
 
     echo " "
 
+    # Function to display styled commit output
+    local output="$1"
+    echo "$(gum style --foreground 45 --bold "$output")"
+    
+
+    # Function to commit changes if user confirms
+    local TYPE="$1"
+    local SCOPE="$2"
+    local SUMMARY="$3"
+    local DESCRIPTION="$4"
+
     # Commit these changes if user confirms
     if gum confirm "Commit changes?"; then
-        git commit -m "$TYPE:$SCOPE: $SUMMARY" -m "$DESCRIPTION"
+        commit_output=$(git commit -m "$TYPE:$SCOPE: $SUMMARY" -m "$DESCRIPTION" 2>&1)
+        styled_commit_output "$commit_output"
     fi
+    
+
+    # # Commit these changes if user confirms
+    # if gum confirm "Commit changes?"; then
+    #     git commit -m "$TYPE:$SCOPE: $SUMMARY" -m "$DESCRIPTION"
+    # fi
 }
 
