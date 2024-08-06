@@ -103,31 +103,31 @@ git_vista() {
 
 
 
-# Function to handle keypress event
-handle_keypress() {
-    local key
-    echo -n "Press 'm' to open the Git menu or 'q' to quit: "
-    while true; do
-        read -n 1 key
-        case $key in
-            m|M)
-                git_vista
-                ;;
-            q|Q)
-                echo "$(gum style --foreground 160 --bold '👋 Quitting...')"
-                exit 0
-                ;;
-            *)
-                echo "$(gum style --foreground 160 --bold '❓ Invalid key. Press "m" to open the menu or "q" to quit.')"
-                ;;
-        esac
-    done
-}
+# # Function to handle keypress event
+# handle_keypress() {
+#     local key
+#     echo -n "Press 'm' to open the Git menu or 'q' to quit: "
+#     while true; do
+#         read -n 1 key
+#         case $key in
+#             m|M)
+#                 git_vista
+#                 ;;
+#             q|Q)
+#                 echo "$(gum style --foreground 160 --bold '👋 Quitting...')"
+#                 exit 0
+#                 ;;
+#             *)
+#                 echo "$(gum style --foreground 160 --bold '❓ Invalid key. Press "m" to open the menu or "q" to quit.')"
+#                 ;;
+#         esac
+#     done
+# }
 
-# Main workflow
-echo "$(gum style --foreground 34 --bold 'Starting your Git workflow. Press "m" anytime to access the menu or "q" to quit.')"
-while true; do
-    # Call the keypress handler
-    handle_keypress
-    # You can add your other workflow commands here, e.g., Git commands
-done
+# # Main workflow
+# echo "$(gum style --foreground 34 --bold 'Starting your Git workflow. Press "m" anytime to access the menu or "q" to quit.')"
+# while true; do
+#     # Call the keypress handler
+#     handle_keypress
+#     # You can add your other workflow commands here, e.g., Git commands
+# done
