@@ -1,7 +1,11 @@
 fileignoreconfig:
   - filename: Utils/get_gemini_help.py
     checksum: 537a7c3a46deb08bf09d5b89e5de93202727cf0f825e6b111b191ee47a043696
+  - filename: README.md
+    checksum: 5ad8a4fc6ff97f6305fe73d8989771ba1964c1073a792c06c18354edf4e9d356
+
 version: "1.0"
+
 
 
 
