@@ -1,31 +1,59 @@
 #!/bin/bash
 
 push_changes() {
+  echo " "
+
+  # Get current branch
+  local current_branch=$(git symbolic-ref --short HEAD)
+
+  # Check if it's a new branch
+  local branch_status=$(git status)
+  local is_new_branch=$(echo "$branch_status" | grep -q "Your branch is based on 'origin/$current_branch'" && echo "false" || echo "true")
+
+  if gum confirm "🚀 Ready to blast off and push the commit to the remote? 🌌"; then
+    echo " "
+    echo "$(gum style --foreground 226 --bold '🛫 Initiating Super Fancy Launch Sequence!')"
     echo " "
 
-    # Get the current branch name
-    local current_branch=$(git symbolic-ref --short HEAD)
+    # Super Fancy Rocket Animation 🚀✨
+    rocket_stages=(
+      "🕑 Countdown: 3..."
+      "🕐 Countdown: 2..."
+      "🕛 Countdown: 1..."
+      "🚀 Ignition..."
+    )
 
-    # Check if the current branch is new
-    local branch_status=$(git status)
-    local is_new_branch=$(echo "$branch_status" | grep -q "Your branch is based on 'origin/$current_branch'" && echo "false" || echo "true")
+    for stage in "${rocket_stages[@]}"; do
+      echo "$(gum style --foreground 45 "$stage")"
+      sleep 0.5
+    done
 
-    if gum confirm "🚀 Ready to blast off and push the commit to the remote? 🌌"; then
-        if [ "$is_new_branch" == "true" ]; then
-            # If branch is new, push with --set-upstream
-            echo "$(gum style --italic --foreground 226 '🌟 Setting up the new branch and pushing to the remote! 🌠')"
-            echo " "
-            push_output=$(git push --set-upstream origin "$current_branch" 2>&1)
-        else
-            # If branch is not new, push normally
-            echo "$(gum style --italic --foreground 82 '🚀 Your code is taking off! 🎉')"
-            echo " "
-            push_output=$(git push 2>&1)
-        fi
+    # Rocket flying animation
+    echo " "
+    rocket="🚀"
+    trail=""
+    for i in {1..20}; do
+      printf "\r%s%s" "$trail" "$rocket"
+      trail+="✨"
+      sleep 0.05
+    done
+    echo " "
+    echo "$(gum style --foreground 226 --bold '🌌 Rocket has left the launch pad! Initiating push...')"
+    echo " "
 
-        # Display push output
-        echo "$push_output" | gum style --border rounded --padding "1 2" --width 80 --margin "1" --foreground 82 --bold
+    # Spinner while pushing
+    if [ "$is_new_branch" == "true" ]; then
+      push_output=$(gum spin --spinner monkey --title "✨ Setting upstream and pushing new branch '$current_branch' to remote..." -- git push --set-upstream origin "$current_branch" 2>&1)
     else
-        echo "$(gum style --italic --foreground 159 'Alright, no space travel today. 🌠 Maybe next time! 🚀👨‍🚀')"
+      push_output=$(gum spin --spinner monkey --title "🚀 Pushing branch '$current_branch' to remote..." -- git push 2>&1)
     fi
+
+    echo " "
+    echo "$(gum style --foreground 82 --bold '✅ Push Complete! Here\'s the log:')"
+    echo "$push_output" | gum style --border rounded --padding "1 2" --width 80 --margin "1" --foreground 82 --bold
+
+  else
+    echo "$(gum style --italic --foreground 159 '❌ Launch aborted. Maybe next orbit! 🌌🚫')"
+  fi
 }
+
