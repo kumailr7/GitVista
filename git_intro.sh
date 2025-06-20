@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Load API key
-source Utils/load_api_key.sh
-
+GITVISTA_HOME="${GITVISTA_HOME:-$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)}"
 # Source command scripts
-source Commands/git_push.sh
-source Commands/git_add.sh
-source Commands/git_status.sh
-source Commands/get_git_help.sh
-source Commands/git_commit.sh
+source "$GITVISTA_HOME/Utils/load_api_key.sh"
+source "$GITVISTA_HOME/Commands/git_push.sh"
+source "$GITVISTA_HOME/Commands/git_add.sh"
+source "$GITVISTA_HOME/Commands/git_status.sh"
+source "$GITVISTA_HOME/Commands/get_git_help.sh"
+source "$GITVISTA_HOME/Commands/git_commit.sh"
 
 # Utility: display a styled header
 display_header() {

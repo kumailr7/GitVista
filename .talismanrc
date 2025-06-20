@@ -3,6 +3,10 @@ fileignoreconfig:
     checksum: 537a7c3a46deb08bf09d5b89e5de93202727cf0f825e6b111b191ee47a043696
   - filename: README.md
     checksum: 5ad8a4fc6ff97f6305fe73d8989771ba1964c1073a792c06c18354edf4e9d356
+  - filename: Utils/get_gemini_help.py
+    checksum: 7f7ef157034702f895962fca643857b26605c0b1eb019a31fe0ec7f477b84f30
+  - filename: install.sh
+    checksum: 504f94886125389e73884907c6f3fecbff1510b70ce4513f266170978b629ea6
 
 version: "1.0"
 
