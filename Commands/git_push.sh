@@ -12,7 +12,7 @@ push_changes() {
 
   if gum confirm "🚀 Ready to blast off and push the commit to the remote? 🌌"; then
     echo " "
-    echo "$(gum style --foreground 226 --bold '🛫 Initiating Super Fancy Launch Sequence!')"
+    echo "$(gum style --foreground 226 --bold "🛫 Initiating Super Fancy Launch Sequence!")"
     echo " "
 
     # Super Fancy Rocket Animation 🚀✨
@@ -38,7 +38,7 @@ push_changes() {
       sleep 0.05
     done
     echo " "
-    echo "$(gum style --foreground 226 --bold '🌌 Rocket has left the launch pad! Initiating push...')"
+    echo "$(gum style --foreground 226 --bold "🌌 Rocket has left the launch pad! Initiating push...")"
     echo " "
 
     # Spinner while pushing
@@ -49,11 +49,11 @@ push_changes() {
     fi
 
     echo " "
-    echo "$(gum style --foreground 82 --bold '✅ Push Complete! Here\'s the log:')"
+    echo "$(gum style --foreground 82 --bold "✅ Push Complete! Here\'s the log:")"
     echo "$push_output" | gum style --border rounded --padding "1 2" --width 80 --margin "1" --foreground 82 --bold
 
   else
-    echo "$(gum style --italic --foreground 159 '❌ Launch aborted. Maybe next orbit! 🌌🚫')"
+    echo "$(gum style --italic --foreground 159 "❌ Launch aborted. Maybe next orbit! 🌌🚫")"
   fi
 }
 
