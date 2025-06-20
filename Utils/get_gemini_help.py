@@ -1,51 +1,52 @@
 import os
 import sys
 from dotenv import load_dotenv
-import google.generativeai as genai
+from google import genai  # ✅ use the correct modern library
 
 def load_api_key():
-    """Load the API key from the .env file."""
+    """Load API key from .env and strip accidental quotes."""
     load_dotenv()
     api_key = os.getenv("API_KEY")
     if not api_key:
-        print("API key not found. Please set it in the .env file.")
+        print("❌ API key not found. Please set it in the .env file.")
         sys.exit(1)
+    # Remove accidental quotes if present
+    api_key = api_key.strip('"').strip("'")
     return api_key
 
-def configure_model(api_key):
-    """Configure and return the Generative Model instance."""
-    genai.configure(api_key=api_key)
-    return genai.GenerativeModel('gemini-1.5-pro')
-
 def create_prompt(command):
-    """Create and return the structured prompt."""
+    """Create a structured prompt for Gemini."""
     return f"""
-    Provide a short description and an example for the Git command: {command}.
+Provide a short description and an example for the Git command: {command}.
 
-    1. **What is {command}?**
-    - A clear and concise explanation of what the command does.
+1. **What is `{command}`?**
+- A clear and concise explanation.
 
-    2. **Example of {command}:**
-    - Provide an example usage of the command.
-    """
+2. **Example of `{command}`:**
+- Provide an example usage.
+"""
 
 def get_help(command):
-    """Generate and return the solution for the given command."""
+    """Call Gemini and get the result."""
     api_key = load_api_key()
-    model = configure_model(api_key)
+    client = genai.Client()
     prompt = create_prompt(command)
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt
+    )
     return response.text
 
 def main():
-    """Main function to handle command-line arguments and print the solution."""
+    """CLI entry point."""
     if len(sys.argv) != 2:
-        print("Usage: python get_gemini_help.py <command>")
+        print("Usage: python get_gemini_help.py <git-command>")
         sys.exit(1)
-    
+
     command = sys.argv[1]
-    solution = get_help(command)
-    print(solution)
+    result = get_help(command)
+    print("\n✅ Gemini says:\n")
+    print(result)
 
 if __name__ == "__main__":
     main()
