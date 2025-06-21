@@ -49,8 +49,8 @@ push_changes() {
     fi
 
     echo " "
-    gum style --foreground 82 --bold "✅ Push Complete! Here's the log:"
-    echo "$push_output" | gum format --type=code | gum pager
+    echo "$(gum style --foreground 82 --bold "✅ Push Complete! Here\'s the log:")"
+    echo "$push_output" | gum style --border rounded --padding "1 2" --width 82 --margin "1" --foreground 82 --bold
 
   else
     echo "$(gum style --italic --foreground 159 "❌ Launch aborted. Maybe next orbit! 🌌🚫")"

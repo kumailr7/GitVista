@@ -14,6 +14,7 @@ def load_api_key():
     api_key = api_key.strip('"').strip("'")
     return api_key
 
+# get_gemini_help.py
 def create_prompt(command):
     """Create a structured prompt for Gemini."""
     return f"""
